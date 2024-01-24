@@ -1,0 +1,84 @@
+﻿@model IEnumerable<ProjectsMeasurements.Models.Operations.MeasurementsHeader>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create" asp-route-MeasurementTypeID=@ViewBag.MeasurementTypeID>Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MeasurementCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MeasurementDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MeasurementTotalPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Remarks)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MeasurementProject)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MeasurementOwner)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MeasurementContractor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastUpdateDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastUpdateUser)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeasurementCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeasurementDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeasurementTotalPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Remarks)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeasurementProject.Code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeasurementOwner.OwnerNameEn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeasurementContractor.ContractorNameEn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastUpdateDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastUpdateUser.UserEmail)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

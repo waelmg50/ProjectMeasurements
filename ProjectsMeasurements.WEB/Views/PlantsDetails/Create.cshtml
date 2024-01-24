@@ -1,0 +1,56 @@
+﻿@model ProjectsMeasurements.Models.Operations.PlantsDetail
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>PlantsDetail</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PlantID" class="control-label"></label>
+                <select asp-for="PlantID" class ="form-control" asp-items="ViewBag.PlantID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlantHeight" class="control-label"></label>
+                <input asp-for="PlantHeight" class="form-control" />
+                <span asp-validation-for="PlantHeight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlantHeihgtUnitID" class="control-label"></label>
+                <select asp-for="PlantHeihgtUnitID" class ="form-control" asp-items="ViewBag.PlantHeihgtUnitID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlantTrunkWidth" class="control-label"></label>
+                <input asp-for="PlantTrunkWidth" class="form-control" />
+                <span asp-validation-for="PlantTrunkWidth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlantDefaultPrice" class="control-label"></label>
+                <input asp-for="PlantDefaultPrice" class="form-control" />
+                <span asp-validation-for="PlantDefaultPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastUserID" class="control-label"></label>
+                <select asp-for="LastUserID" class ="form-control" asp-items="ViewBag.LastUserID"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Projects Measurements</title>
+    <link href="~/css/jquery-ui.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link href="~/lib/datatables.net/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/jquery-ui.js"></script>
+    <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
+    <link href="~/lib/select2/css/select2-bootstrap4.css" rel="stylesheet" />
+    <script src="~/lib/select2/js/select2.js"></script>
+    <script src="~/lib/datatables.net/jquery.dataTables.js"></script>
+    <link rel="stylesheet" href="~/ProjectsMeasurements.WEB.styles.css" asp-append-version="true" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".table").addClass("table-striped");
+            $(".table").addClass("table-bordered");
+            $(".table").addClass("table-hover");
+            $(".table").addClass("order-column");
+            $(".table").addClass("display");
+            $(".table").addClass("dataTable");
+            $(".table").addClass("no-footer");
+            $(".dropdown").select2();
+            $(".table").DataTable();
+            $(".dropdownMultiple").select2({
+                multiple: true,
+                closeOnSelect: false
+            });
+            $('.date-picker').datepicker({
+                dateFormat: "yy-mm-dd",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-50:+50"
+            });
+        });
+
+    </script>
+    <style>
+        .GradientBackGround{
+            background-image: linear-gradient(to top, #dfe9f9 0%, #87b5db 100%);
+            /*background-image: linear-gradient(310deg, hsl(120deg 85% 21%) 0%, hsl(120deg 87% 25%) 11%, hsl(120deg 89% 29%) 18%, hsl(120deg 91% 34%) 24%, hsl(120deg 93% 38%) 29%, hsl(119deg 68% 47%) 36%, hsl(118deg 65% 57%) 44%, hsl(117deg 73% 68%) 57%, hsl(116deg 88% 80%) 100%);*/
+        }
+    </style>
+</head>
+<body class="GradientBackGround">
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light GradientBackGround border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="PlantsCategories" asp-action="Index">Plants Categories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Units" asp-action="Index">Units</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="MeasurementsTypes" asp-action="Index">Measurements Types</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Plants" asp-action="Index">All Plants</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Contractors" asp-action="Index">Contractors</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Owners" asp-action="Index">Owners</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Projects" asp-action="Index">Projects</a>
+                        </li>
+                        @if(ViewBag.MeasurementTypes != null)
+                        {
+                            foreach (ProjectsMeasurements.Models.BasicData.MeasurementsType mt in ViewBag.MeasurementTypes)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="MeasurementsHeaders" asp-action="Index" asp-route-MeasurementTypeID=@mt.ID>@mt.TypeNameEn</a>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container GradientBackGround">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - ProjectsMeasurements - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/select2/js/select2.full.min.js"></script>
+    <script src="~/js/select2.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

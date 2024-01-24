@@ -1,0 +1,96 @@
+﻿@model IEnumerable<ProjectsMeasurements.Models.Operations.Plant>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    @if(ViewBag.CategoryID == null)
+    {
+        <a asp-action="Create">Create New</a>
+    }
+    else
+    {
+    <a asp-action="Create" asp-route-CategoryID=@ViewBag.CategoryID>Create New</a>
+    }
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PlantNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlantCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlantNameEn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlantNameAr)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.PlantDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryOfPlant)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.PlantFullCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastUpdateDate)
+            </th>
+            @*<th>
+            @Html.DisplayNameFor(model => model.LastUpdateUser)
+            </th>*@
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlantNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlantCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlantNameEn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlantNameAr)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.PlantDescription)
+                </td>
+                <td>
+                    @if (item.CategoryOfPlant != null)
+                    {
+                        Html.DisplayFor(modelItem => item.CategoryOfPlant.CategoryNameEn);
+                    }
+                </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlantFullCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastUpdateDate)
+                </td>
+                @*<td>
+            @Html.DisplayFor(modelItem => item.LastUpdateUser.UserEmail)
+            </td>*@
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a> |
+                    <a asp-controller="PlantsDetails" asp-action="Index" asp-route-PlantID="@item.ID">Prices</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

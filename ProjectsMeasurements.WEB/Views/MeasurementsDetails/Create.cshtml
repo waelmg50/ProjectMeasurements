@@ -1,0 +1,61 @@
+﻿@model ProjectsMeasurements.Models.Operations.MeasurementsDetail
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Measurements Details</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MeasurementHeaderID" class="control-label"></label>
+                <select asp-for="MeasurementHeaderID" class ="form-control" asp-items="ViewBag.MeasurementHeaderID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlantDetailID" class="control-label"></label>
+                <select asp-for="PlantDetailID" class ="form-control" asp-items="ViewBag.PlantDetailID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlantQuantity" class="control-label"></label>
+                <input asp-for="PlantQuantity" class="form-control" />
+                <span asp-validation-for="PlantQuantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlantUnitPrice" class="control-label"></label>
+                <input asp-for="PlantUnitPrice" class="form-control" />
+                <span asp-validation-for="PlantUnitPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlantTotalPrice" class="control-label"></label>
+                <input asp-for="PlantTotalPrice" class="form-control" />
+                <span asp-validation-for="PlantTotalPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Remarks" class="control-label"></label>
+                <input asp-for="Remarks" class="form-control" />
+                <span asp-validation-for="Remarks" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="LastUserID" class="control-label"></label>
+                <select asp-for="LastUserID" class ="form-control" asp-items="ViewBag.LastUserID"></select>
+            </div>*@
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

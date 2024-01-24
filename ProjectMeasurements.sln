@@ -1,0 +1,88 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectsMeasurements.Models", "ProjectMeasurementModels\ProjectsMeasurements.Models.csproj", "{E5F442E5-3506-4922-A925-06D7D2C6AC27}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectsMeasurements.DBContext", "ProjectsMeasurements.DBContext\ProjectsMeasurements.DBContext.csproj", "{0994C573-5DE6-409E-BDE7-974561B96446}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectsMeasurements.API", "ProjectsMeasurements.API\ProjectsMeasurements.API.csproj", "{153B76AB-BAE1-41BE-AF6A-9E67A6E44AF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities\Utilities.csproj", "{D55B0581-7DDA-49F9-8AFD-0368094B6412}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectsMeasurements.WEB", "ProjectsMeasurements.WEB\ProjectsMeasurements.WEB.csproj", "{390E112F-DAC4-4B60-ACCF-849B3AFF7EF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectsMeasurements.Repositories", "ProjectsMeasurements.Repositories\ProjectsMeasurements.Repositories.csproj", "{97B1E64E-64E2-4347-B6E3-D4A7383D1761}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectsMeasuremnts.Services", "ProjectsMeasuremnts.Services\ProjectsMeasuremnts.Services.csproj", "{209C3903-75E7-40D8-9E7A-B5E9AAE9C08F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E5F442E5-3506-4922-A925-06D7D2C6AC27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5F442E5-3506-4922-A925-06D7D2C6AC27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5F442E5-3506-4922-A925-06D7D2C6AC27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5F442E5-3506-4922-A925-06D7D2C6AC27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0994C573-5DE6-409E-BDE7-974561B96446}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0994C573-5DE6-409E-BDE7-974561B96446}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0994C573-5DE6-409E-BDE7-974561B96446}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0994C573-5DE6-409E-BDE7-974561B96446}.Release|Any CPU.Build.0 = Release|Any CPU
+		{153B76AB-BAE1-41BE-AF6A-9E67A6E44AF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{153B76AB-BAE1-41BE-AF6A-9E67A6E44AF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{153B76AB-BAE1-41BE-AF6A-9E67A6E44AF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{153B76AB-BAE1-41BE-AF6A-9E67A6E44AF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D55B0581-7DDA-49F9-8AFD-0368094B6412}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D55B0581-7DDA-49F9-8AFD-0368094B6412}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D55B0581-7DDA-49F9-8AFD-0368094B6412}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D55B0581-7DDA-49F9-8AFD-0368094B6412}.Release|Any CPU.Build.0 = Release|Any CPU
+		{390E112F-DAC4-4B60-ACCF-849B3AFF7EF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{390E112F-DAC4-4B60-ACCF-849B3AFF7EF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{390E112F-DAC4-4B60-ACCF-849B3AFF7EF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{390E112F-DAC4-4B60-ACCF-849B3AFF7EF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97B1E64E-64E2-4347-B6E3-D4A7383D1761}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97B1E64E-64E2-4347-B6E3-D4A7383D1761}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97B1E64E-64E2-4347-B6E3-D4A7383D1761}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97B1E64E-64E2-4347-B6E3-D4A7383D1761}.Release|Any CPU.Build.0 = Release|Any CPU
+		{209C3903-75E7-40D8-9E7A-B5E9AAE9C08F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{209C3903-75E7-40D8-9E7A-B5E9AAE9C08F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{209C3903-75E7-40D8-9E7A-B5E9AAE9C08F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{209C3903-75E7-40D8-9E7A-B5E9AAE9C08F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {54707331-784D-4AC2-8852-FFF5A57C0D77}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 8
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://misrsmart.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ProjectMeasurementModels\\ProjectsMeasurements.Models.csproj
+		SccProjectName1 = ProjectMeasurementModels
+		SccLocalPath1 = ProjectMeasurementModels
+		SccProjectUniqueName2 = ProjectsMeasurements.DBContext\\ProjectsMeasurements.DBContext.csproj
+		SccProjectName2 = ProjectsMeasurements.DBContext
+		SccLocalPath2 = ProjectsMeasurements.DBContext
+		SccProjectUniqueName3 = ProjectsMeasurements.API\\ProjectsMeasurements.API.csproj
+		SccProjectName3 = ProjectsMeasurements.API
+		SccLocalPath3 = ProjectsMeasurements.API
+		SccProjectUniqueName4 = Utilities\\Utilities.csproj
+		SccProjectName4 = Utilities
+		SccLocalPath4 = Utilities
+		SccProjectUniqueName5 = ProjectsMeasurements.WEB\\ProjectsMeasurements.WEB.csproj
+		SccProjectName5 = ProjectsMeasurements.WEB
+		SccLocalPath5 = ProjectsMeasurements.WEB
+		SccProjectUniqueName6 = ProjectsMeasurements.Repositories\\ProjectsMeasurements.Repositories.csproj
+		SccProjectName6 = ProjectsMeasurements.Repositories
+		SccLocalPath6 = ProjectsMeasurements.Repositories
+		SccProjectUniqueName7 = ProjectsMeasuremnts.Services\\ProjectsMeasuremnts.Services.csproj
+		SccProjectName7 = ProjectsMeasuremnts.Services
+		SccLocalPath7 = ProjectsMeasuremnts.Services
+	EndGlobalSection
+EndGlobal
