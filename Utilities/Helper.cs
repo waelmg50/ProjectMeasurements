@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Resources;
 using System.Text;
@@ -11,7 +12,7 @@ namespace Utilities
     {
         #region Members
 
-        private static DateTime dtMinDate = new DateTime(1753, 1, 1);
+        private static DateTime dtMinDate = new(1753, 1, 1);
         public enum StampActions
         {
             EditedBy = 1,
@@ -30,17 +31,6 @@ namespace Utilities
             get
             {
                 return dtMinDate;
-            }
-        }
-
-        /// <summary>
-        /// Gets the message header of the program.
-        /// </summary>
-        public static string MessageHeader
-        {
-            get
-            {
-                return Resources.ProgramMessages.MesHeader;
             }
         }
 
@@ -94,7 +84,7 @@ namespace Utilities
             if (strInput.StartsWith(".")) return false;
             if (strInput.EndsWith(".")) return false;
             string SubInput = strInput.Substring(strInput.IndexOf('.') + 1);
-            if (SubInput.IndexOf('.') != -1) return false;
+            if (SubInput.Contains('.')) return false;
             foreach (char A in strInput.ToCharArray())
             {
                 if (A == '0' || A == '1' || A == '2' || A == '3' ||
@@ -119,72 +109,6 @@ namespace Utilities
                 return CheckNumberDouble(objInput.ToString());
         }
         /// <summary>
-        /// Gets the suitable option for the message in the message box according to the current language.
-        /// </summary>
-        /// <returns>Returns the option of the message in the message box according to the current language.</returns>
-        public static MessageBoxOptions GetMessageBoxOptions()
-        {
-            return MessageBoxOptions.RtlReading;
-        }
-        /// <summary>
-        /// Displays a message box to the user.
-        /// </summary>
-        /// <param name="Message">The message that will appear to the user in the message box.</param>
-        /// <returns>Returns the button that the user pressed in the message box.</returns>
-        public static DialogResult ShowMessage(string Message)
-        {
-            
-            return MessageBox.Show(Message, MessageHeader, MessageBoxButtons.OK
-                   , MessageBoxIcon.Information, MessageBoxDefaultButton.Button1,
-                   GetMessageBoxOptions());
-        }
-        /// <summary>
-        /// Displays a message box to the user.
-        /// </summary>
-        /// <param name="Message">The message that will appear to the user in the message box.</param>
-        /// <param name="MessageButtons">The buttons that will appear to the user in the message box.</param>
-        /// <returns>Returns the button that the user pressed in the message box.</returns>
-        public static DialogResult ShowMessage(string Message, MessageBoxButtons MessageButtons)
-        {
-            return MessageBox.Show(Message, MessageHeader, MessageButtons
-                   , MessageBoxIcon.Information, MessageBoxDefaultButton.Button1,
-                   GetMessageBoxOptions());
-        }
-        /// <summary>
-        /// Displays a message box to the user.
-        /// </summary>
-        /// <param name="Message">The message that will appear to the user in the message box.</param>
-        /// <param name="MessageButtons">The buttons that will appear to the user in the message box.</param>
-        /// <param name="MessageIcon">The icon that will appear to the user in the message box.</param>
-        /// <returns>Returns the button that the user pressed in the message box.</returns>
-        public static DialogResult ShowMessage(string Message, MessageBoxButtons MessageButtons, MessageBoxIcon MessageIcon)
-        {
-            return MessageBox.Show(Message, MessageHeader, MessageButtons, MessageIcon
-                , MessageBoxDefaultButton.Button1, GetMessageBoxOptions());
-        }
-        /// <summary>
-        /// Displays a message box to the user.
-        /// </summary>
-        /// <param name="Message">The message that will appear to the user in the message box.</param>
-        /// <param name="MessageButtons">The buttons that will appear to the user in the message box.</param>
-        /// <param name="MessageIcon">The icon that will appear to the user in the message box.</param>
-        /// <param name="MessageDefBtn">The default button that it is focused when the message box appears.</param>
-        /// <returns>Returns the button that the user pressed in the message box.</returns>
-        public static DialogResult ShowMessage(string Message, MessageBoxButtons MessageButtons, MessageBoxIcon MessageIcon, MessageBoxDefaultButton MessageDefBtn)
-        {
-            return MessageBox.Show(Message, MessageHeader, MessageButtons, MessageIcon
-                , MessageDefBtn, GetMessageBoxOptions());
-        }
-        /// <summary>
-        /// Gets the error icon alignment according to the language in the
-        /// configuration file.
-        /// </summary>
-        /// <returns>Returns the icon alignment.</returns>
-        public static ErrorIconAlignment GetErrorIconAlignment()
-        {
-            return ErrorIconAlignment.MiddleLeft;
-        }
-        /// <summary>
         /// Tests if the supplied byte array represents an image or not.
         /// </summary>
         /// <param name="data">The byte array to test.</param>
@@ -192,7 +116,7 @@ namespace Utilities
         public static bool IsImage(byte[] data)
         {
             //read 64 bytes of the stream only to determine the type
-            string myStr = System.Text.Encoding.ASCII.GetString(data).Substring(0, 16);
+            string myStr = Encoding.ASCII.GetString(data).Substring(0, 16);
             //check if its definately an image.
             if (myStr.Substring(8, 2).ToString().ToLower() != "if")
             {         //its not a jpeg
@@ -201,39 +125,11 @@ namespace Utilities
                     if (myStr.Substring(0, 2).ToString().ToLower() != "bm")
                     {                   //its not a .bmp                   
                         if (myStr.Substring(0, 2).ToString().ToLower() != "ii")
-                        {
-                            myStr = null;
                             return false;
-                        }
                     }
                 }
             }
-            myStr = null;
             return true;
-        }
-        /// <summary>
-        /// Gets the input language corresponding to the supplied culture name.
-        /// </summary>
-        /// <param name="strRequiredLanguage">The culture name of the required input language (it is "ar" or "en").
-        /// </param>
-        /// <returns>Returns the input language of the supplied culture name if it was not installed it returns the
-        /// current input language.</returns>
-        public static InputLanguage GetInputLanguage(string strRequiredLanguage)
-        {
-            foreach (InputLanguage inplang in InputLanguage.InstalledInputLanguages)
-                if (inplang.Culture.Name.Contains(strRequiredLanguage))
-                    return inplang;
-            //If the code reached here then there is no approperiate installed language.
-            string strRequiredLanguageAbsent = Resources.ProgramMessages.MesNoArabicInput;
-            if (strRequiredLanguage.ToLower().Contains("en"))
-                strRequiredLanguageAbsent = Resources.ProgramMessages.MesNoEnglishInput;
-            if (Helper.ShowMessage(strRequiredLanguageAbsent, MessageBoxButtons.RetryCancel,
-                MessageBoxIcon.Question) == DialogResult.Retry)
-                return GetInputLanguage(strRequiredLanguage);
-            else
-                Helper.ShowMessage(Resources.ProgramMessages.MesCantWriteInField);
-            //Return the current input language.
-            return InputLanguage.CurrentInputLanguage;
         }
         /// <summary>
         /// Converts a string in arabic language to it's finger print to avoid arabic dictation errors.
@@ -243,26 +139,41 @@ namespace Utilities
         public static string FingerPrintString(string inString)
         {
             string FpString = inString;
-            if (FpString.IndexOf("Çááå") != -1) FpString = FpString.Replace("Çááå", "ááå");
-            if (FpString.IndexOf('Ã') != -1) FpString = FpString.Replace('Ã', 'Ç');
-            if (FpString.IndexOf('Å') != -1) FpString = FpString.Replace('Å', 'Ç');
-            if (FpString.IndexOf('Â') != -1) FpString = FpString.Replace('Â', 'Ç');
+            if (FpString.IndexOf("اللة") != -1) FpString = FpString.Replace("اللة", "الله");
+            if (FpString.IndexOf('أ') != -1) FpString = FpString.Replace('أ', 'ا');
+            if (FpString.IndexOf('إ') != -1) FpString = FpString.Replace('إ', 'ا');
+            if (FpString.IndexOf('آ') != -1) FpString = FpString.Replace('آ', 'ا');
             if (FpString.IndexOf('ì') != -1) FpString = FpString.Replace('ì', 'í');
-            if (FpString.IndexOf('É') != -1) FpString = FpString.Replace('É', 'å');
+            if (FpString.IndexOf('ة') != -1) FpString = FpString.Replace('ة', 'ه');
             if (FpString.IndexOf('-') != -1) FpString = FpString.Replace("-", "");
             if (FpString.IndexOf(" ") != -1) FpString = FpString.Replace(" ", "");
             return FpString;
         }
-        public static System.Data.DataTable DecryptColumns(System.Data.DataTable tblSource, params string[] strColumns)
+         static bool CheckColumns(DataTable tblSource, string[] strColumns)
+        {
+            foreach (string strColumn in strColumns)
+                if (!tblSource.Columns.Contains(strColumn))
+                    return false;
+            return true;
+        }
+        public static DataTable DecryptColumns(DataTable tblSource, string EncryptionKey, params string[] strColumns)
         {
             try
             {
-                System.Data.DataTable tblResult = tblSource;
-                if (SqlAdoWrapper.CheckColumns(tblSource, strColumns) && tblSource.Rows.Count > 0)
+                DataTable tblResult = tblSource;
+                if (CheckColumns(tblSource, strColumns) && tblSource.Rows.Count > 0)
                 {
                     for (int i = 0; i < tblSource.Rows.Count; i++)
                         for (int j = 0; j < strColumns.Length; j++)
-                            tblResult.Rows[i][strColumns[j]] = ERFT.Rtgy(tblSource.Rows[i][strColumns[j]].ToString());
+                        {
+                            if (tblSource.Rows[i][strColumns[j]] != null && tblSource.Rows[i][strColumns[j]] != DBNull.Value)
+                            {
+                                string SourceData = tblSource.Rows[i][strColumns[j]].ToString();
+                                (bool, string) Result = Downloader.Download(SourceData ?? string.Empty, EncryptionKey);
+                                if (Result.Item1)
+                                    tblResult.Rows[i][strColumns[j]] = Result.Item2;
+                            }
+                        }
                 }
                 return tblResult;
             }
@@ -270,7 +181,7 @@ namespace Utilities
             {
                 ErrorHandler.LogError(ex);
             }
-            return null;
+            return new DataTable();
         }
         /// <summary>
         /// Decrypts the data of the supplied tables.
@@ -279,40 +190,39 @@ namespace Utilities
         /// <param name="strColumns"></param>
         /// <param name="strSuff"></param>
         /// <returns></returns>
-        public static System.Data.DataTable DecryptColumns(System.Data.DataTable tblSource, string[] strColumns, string strSuff)
+        public static DataTable DecryptColumns(DataTable tblSource, string strSuff, string EncryptionKey, params string[] strColumns)
         {
             try
             {
-                System.Data.DataTable tblResult = tblSource;
-                if (SqlAdoWrapper.CheckColumns(tblSource, strColumns) && tblSource.Rows.Count > 0)
+                DataTable tblResult = tblSource;
+                if (CheckColumns(tblSource, strColumns) && tblSource.Rows.Count > 0)
                 {
                     for (int i = 0; i < tblSource.Rows.Count; i++)
                         for (int j = 0; j < strColumns.Length; j++)
-                            tblResult.Rows[i][strColumns[j]] = strSuff + ERFT.Rtgy(tblSource.Rows[i][strColumns[j]].ToString()) + strSuff;
+                            if (tblSource.Rows[i][strColumns[j]] != null && tblSource.Rows[i][strColumns[j]] != DBNull.Value)
+                            {
+                                string SourceData = tblSource.Rows[i][strColumns[j]].ToString();
+                                (bool, string) Result = Downloader.Upload(SourceData ?? string.Empty, EncryptionKey);
+                                if (Result.Item1)
+                                    tblResult.Rows[i][strColumns[j]] = strSuff + Result.Item2;
+                            }
                 }
             }
             catch (Exception ex)
             {
                 ErrorHandler.LogError(ex);
             }
-            return null;
+            return new DataTable();
         }
         public static string DisplayParkingPeriod(TimeSpan tsPeriod)
         {
-            int iHours = 0, iMinitues = 0, iSeconds = 0;
+            int iHours = 0, iMinitues, iSeconds;
             if (tsPeriod.Days > 0)
                 iHours = tsPeriod.Days * 24;
             iHours += tsPeriod.Hours;
             iMinitues = tsPeriod.Minutes;
             iSeconds = tsPeriod.Seconds;
             return string.Format("{0} h: {1} : m : {2} s", iHours, iMinitues, iSeconds);
-        }
-        public static DateTime GetCurrentServerDate()
-        {
-            object objCurrentDate = SqlAdoWrapper.ExecuteScalarCommand("select getdate()", null, true);
-            if (objCurrentDate != null && objCurrentDate != DBNull.Value)
-                return Convert.ToDateTime(objCurrentDate);
-            return dtMinDate;
         }
 
         #endregion

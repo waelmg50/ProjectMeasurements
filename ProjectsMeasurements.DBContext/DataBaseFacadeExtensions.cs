@@ -1,11 +1,4 @@
-﻿using System.Data;
-using System.Data.Common;
-using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-
-namespace ProjectsMeasurements.DBContext
+﻿namespace ProjectsMeasurements.DBContext
 {
     public static class DataBaseFacadeExtensions
     {

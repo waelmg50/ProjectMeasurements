@@ -12,7 +12,7 @@ namespace ProjectsMeasuremnts.Services.Interfaces
 
         #region Select Methods
 
-        Task<IEnumerable<T>> GetChilds(object ParentID);
+        Task<IEnumerable<T>> GetChilds(object ParentID, bool GetDirectChilds);
 
         #endregion
 

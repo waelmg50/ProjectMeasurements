@@ -36,87 +36,6 @@ namespace Utilities
         /// Display a message to the user with the error and writes it in the error file.
         /// </summary>
         /// <param name="e">The Exception object that raised in the application.</param>
-        public static void LogError(SqlException e)
-        {
-            if (e.Number == 2 && (e.Message.Contains("A network-related or instance-specific error")))
-                Helper.ShowMessage(Resources.ProgramMessages.MesSqlServerStopped);
-            else if (e.Number == 547 && !(e.Message.Contains("statement conflicted with the FOREIGN KEY SAME TABLE constraint")) && !(e.Message.Contains("statement conflicted with the FOREIGN KEY constraint")))
-                Helper.ShowMessage(Resources.ProgramMessages.ErrMesRelRec);
-            else if (e.Number == 3241)
-                Helper.ShowMessage(Resources.ProgramMessages.ErrMesInvBckpFile);
-            else if (e.Number == 3279)
-                Helper.ShowMessage(Resources.ProgramMessages.ErrMesInvBckpFilePass);
-            else if (e.Number == 1834)
-                Helper.ShowMessage(Resources.ProgramMessages.ErrMesDBFIlesExist);
-            else if (e.Number == 17 || e.Number == 53 || e.Number == -1 || e.Message.Contains("SQL Server does not allow remote connections"))
-                Helper.ShowMessage(Resources.ProgramMessages.ErrMesServerExist);
-            else if (e.Number == 4060 && !(e.Message.Contains("Cannot open database") && e.Message.Contains("requested by the login. The login failed")))
-                Helper.ShowMessage(Resources.ProgramMessages.ErrMesDBExist);
-            else if (e.Number == 18456)
-                Helper.ShowMessage(Resources.ProgramMessages.ErrMesInvalidSQLUsr);
-            else if (e.Number == 233)
-                Helper.ShowMessage(Resources.ProgramMessages.ErrMesConnFailed);
-            else if (e.Number == 5133 || e.Number == 5110)
-                Helper.ShowMessage(Resources.ProgramMessages.ErrMesDBFolderDoseNotExist);
-            else if (e.Number == 3201)
-                Helper.ShowMessage(Resources.ProgramMessages.ErrMesInstallDBOnServer);
-            else if (e.Number == 3159 || e.Number == 3154 || e.Number == 3102)
-            {
-                Helper.ShowMessage(Resources.ProgramMessages.ErrMesDBExist);
-            }
-            else if (e.Message.Contains("Timeout expired") || e.Message.Contains("server is not responding"))
-                Helper.ShowMessage(Resources.ProgramMessages.ErrMesServerNotResponding);
-            else
-                ShowErrorMessageToUser(e.Message);
-            WriteError(new string[] {"Error Number : " + e.Number, "Error Message : " + e.Message,
-                    "Error Type : " + e.GetType().Name, "Error Source : " + e.Source, "Error Trace : " + e.StackTrace});
-        }        /// <summary>
-                 /// Display a message to the user with the error and writes it in the error file.
-                 /// </summary>
-                 /// <param name="e">The Exception object that raised in the application.</param>
-                 /// <param name="strCommandName">The sql command text that caused the exception.</param>
-        public static void LogError(SqlException e, string strCommandName)
-        {
-            if (e.Number == 2 && (e.Message.Contains("A network-related or instance-specific error")))
-                Helper.ShowMessage(Resources.ProgramMessages.MesSqlServerStopped);
-            else if (e.Number == 547 && !(e.Message.Contains("statement conflicted with the FOREIGN KEY SAME TABLE constraint"))
-                && !(e.Message.Contains("statement conflicted with the FOREIGN KEY constraint")))
-                Helper.ShowMessage(Resources.ProgramMessages.ErrMesRelRec);
-            else if (e.Number == 3241)
-                Helper.ShowMessage(Resources.ProgramMessages.ErrMesInvBckpFile);
-            else if (e.Number == 3279)
-                Helper.ShowMessage(Resources.ProgramMessages.ErrMesInvBckpFilePass);
-            else if (e.Number == 1834)
-                Helper.ShowMessage(Resources.ProgramMessages.ErrMesDBFIlesExist);
-            else if (e.Number == 17 || e.Number == 53 || e.Number == -1 || e.Message.Contains("SQL Server does not allow remote connections"))
-                Helper.ShowMessage(Resources.ProgramMessages.ErrMesServerExist);
-            else if (e.Number == 4060)
-                Helper.ShowMessage(Resources.ProgramMessages.ErrMesDBExist);
-            else if (e.Number == 18456)
-                Helper.ShowMessage(Resources.ProgramMessages.ErrMesInvalidSQLUsr);
-            else if (e.Number == 233)
-                Helper.ShowMessage(Resources.ProgramMessages.ErrMesConnFailed);
-            else if (e.Number == 5133 || e.Number == 5110)
-                Helper.ShowMessage(Resources.ProgramMessages.ErrMesDBFolderDoseNotExist);
-            else if (e.Number == 3201)
-                Helper.ShowMessage(Resources.ProgramMessages.ErrMesInstallDBOnServer);
-            else if (e.Number == 3159 || e.Number == 3154 || e.Number == 3102)
-            {
-                Helper.ShowMessage(Resources.ProgramMessages.ErrMesDBExist);
-                WriteError(new string[] {"Error Message : " + e.Message, "Error Type : " + e.GetType().Name,
-                "Error Source : " + e.Source, "Error Trace : " + e.StackTrace});
-            }
-            else if (e.Message.Contains("Timeout expired") || e.Message.Contains("server is not responding"))
-                Helper.ShowMessage(Resources.ProgramMessages.ErrMesServerNotResponding);
-            else
-                ShowErrorMessageToUser(e.Message);
-            WriteError(new string[] {"Procedure Name or Command Text : " + strCommandName, "Error Number : " + e.Number, "Error Message : "
-                    + e.Message, "Error Type : " + e.GetType().Name, "Error Source : " + e.Source, "Error Trace : " + e.StackTrace});
-        }
-        /// <summary>
-        /// Display a message to the user with the error and writes it in the error file.
-        /// </summary>
-        /// <param name="e">The Exception object that raised in the application.</param>
         public static void LogError(ArgumentNullException e)
         {
             ShowErrorMessageToUser(e.Message);
@@ -178,17 +97,6 @@ namespace Utilities
         /// Display a message to the user with the error and writes it in the error file.
         /// </summary>
         /// <param name="e">The Exception object that raised in the application.</param>
-        public static void LogError(ConfigurationException e)
-        {
-            ShowErrorMessageToUser(e.Message);
-            WriteError(new string[] {"Bar Message : " + e.BareMessage, "File Name : " + e.Filename, "Line : " + e.Line,
-                "Error Message : " + e.Message, "Error Type : " + e.GetType().Name, "Error Source : " + e.Source,
-                "Error Trace : " + e.StackTrace});
-        }
-        /// <summary>
-        /// Display a message to the user with the error and writes it in the error file.
-        /// </summary>
-        /// <param name="e">The Exception object that raised in the application.</param>
         public static void LogError(UnauthorizedAccessException e)
         {
             ShowErrorMessageToUser(e.Message);
@@ -201,30 +109,13 @@ namespace Utilities
         /// <param name="e">The Exception object that raised in the application.</param>
         public static void LogError(Exception e)
         {
-            if (e.Message.Contains("CrystalDecisions.CrystalReports.Engine"))
-            {
-                Helper.ShowMessage(Resources.ProgramMessages.ErrMesCrystalRepInstallation);
-                return;
-            }
             if (e is OutOfMemoryException)
             {
-                Helper.ShowMessage(Resources.ProgramMessages.ErrMesMemoryFull);
+                //Helper.ShowMessage(Resources.ProgramMessages.ErrMesMemoryFull);
                 WriteError(new string[] {"Error Message : " + e.Message, "Error Type : " + e.GetType().Name,
                     "Error Type : " + e.GetType().Name, "Error Source : " + e.Source, "Error Trace : " + e.StackTrace});
                 GC.Collect();
                 //Application.Exit();
-                return;
-            }
-            if (e is SqlException)
-            {
-                SqlException ex = (SqlException)e;
-                LogError(ex);
-                return;
-            }
-            if (e is ConfigurationException)
-            {
-                ConfigurationException ex = (ConfigurationException)e;
-                LogError(ex);
                 return;
             }
             if (e is ArgumentNullException)
@@ -264,30 +155,12 @@ namespace Utilities
         /// <param name="strCommandName">The sql command text that caused the exception.</param>
         public static void LogError(Exception e, string strCommandName)
         {
-            if (e.Message.Contains("CrystalDecisions.CrystalReports.Engine"))
-            {
-                Helper.ShowMessage(Resources.ProgramMessages.ErrMesCrystalRepInstallation);
-                return;
-            }
+            
             if (e is OutOfMemoryException)
             {
-                Helper.ShowMessage(Resources.ProgramMessages.ErrMesMemoryFull);
-                WriteError(new string[] {"Error Message : " + e.Message, "Error Type : " + e.GetType().Name,
+               WriteError(new string[] {"Error Message : " + e.Message, "Error Type : " + e.GetType().Name,
                     "Error Type : " + e.GetType().Name, "Error Source : " + e.Source, "Error Trace : " + e.StackTrace});
                 GC.Collect();
-                Application.Exit();
-                return;
-            }
-            if (e is SqlException)
-            {
-                SqlException ex = (SqlException)e;
-                LogError(ex, strCommandName);
-                return;
-            }
-            if (e is ConfigurationException)
-            {
-                ConfigurationException ex = (ConfigurationException)e;
-                LogError(ex);
                 return;
             }
             if (e is ArgumentNullException)
@@ -340,7 +213,7 @@ namespace Utilities
         {
             try
             {
-                string ErrorFilePath = Application.StartupPath + @"\Error.txt";
+                string ErrorFilePath = @"\Error.txt";
                 if (!File.Exists(ErrorFilePath))
                 {
                     FileStream fsErrorFileCreator = File.Create(ErrorFilePath);
@@ -353,14 +226,14 @@ namespace Utilities
                     swError.WriteLine(strErrorDetail);
                 swError.WriteLine("Date of Error :\t" + DateTime.Now.ToShortDateString());
                 swError.WriteLine("Time of Error :\t" + DateTime.Now.ToLongTimeString());
-                swError.WriteLine("Current User ID :\t" + UserLogin.LoggedUserID);
+                //swError.WriteLine("Current User ID :\t" + UserLogin.LoggedUserID);
                 swError.WriteLine("***************************** ***************************** *****************************");
                 swError.WriteLine();
                 swError.Close();
             }
-            catch (Exception ex)
+            catch //(Exception ex)
             {
-                Helper.ShowMessage(ex.Message);
+                //Helper.ShowMessage(ex.Message);
             }
         }
         /// <summary>
@@ -369,7 +242,7 @@ namespace Utilities
         /// <param name="Message">The string that will appear in the application as an error message.</param>
         public static void LogError(string Message)
         {
-            Helper.ShowMessage(Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //Helper.ShowMessage(Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
             WriteError(new string[] { Message });
         }
         /// <summary>
@@ -378,8 +251,7 @@ namespace Utilities
         /// <param name="strMessage">The Error message to show to the user.</param>
         static void ShowErrorMessageToUser(string strMessage)
         {
-            MessageBox.Show(Resources.ProgramMessages.ErrMesErrorOccured + "\n\n" + strMessage,
-                Helper.MessageHeader, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //MessageBox.Show(Resources.ProgramMessages.ErrMesErrorOccured + "\n\n" + strMessage, Helper.MessageHeader, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         #endregion
